@@ -134,3 +134,15 @@ const enrollmentStats = async (req, res) => {
     });
   }
 };
+
+export default {
+  create,
+  enrollmentByID,
+  read,
+  remove,
+  complete,
+  isStudent,
+  listEnrolled,
+  findEnrollment,
+  enrollmentStats,
+};
