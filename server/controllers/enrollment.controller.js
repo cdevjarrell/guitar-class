@@ -117,3 +117,20 @@ const findEnrollment = async (req, res, next) => {
     });
   }
 };
+
+const enrollmentStats = async (req, res) => {
+  try {
+    let stats = {};
+    stats.totalEnrolled = await Enrollment.find({
+      course: req.course._id,
+    }).countDocuments();
+    stats.totalCompleted = await Enrollment.find({ course: req.course._id })
+      .exists("completed", true)
+      .countDocuments();
+    res.json(stats);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
