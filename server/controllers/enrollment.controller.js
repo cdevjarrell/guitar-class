@@ -99,3 +99,21 @@ const listEnrolled = async (req, res) => {
     });
   }
 };
+
+const findEnrollment = async (req, res, next) => {
+  try {
+    let enrollments = await Enrollment.find({
+      course: req.course._id,
+      studnet: req.auth._id,
+    });
+    if (enrollments.length == 0) {
+      next();
+    } else {
+      res.json(enrollments[0]);
+    }
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
