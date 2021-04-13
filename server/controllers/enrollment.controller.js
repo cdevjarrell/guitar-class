@@ -76,3 +76,12 @@ const remove = async (req, res) => {
   }
 };
 
+const isStudent = (req, res, next) => {
+  const isStudent = req.auth && req.auth._id == req.enrollment.student._id;
+  if (!isStudent) {
+    return res.status("403").json({
+      error: "User is not enrolled",
+    });
+  }
+  next();
+};
