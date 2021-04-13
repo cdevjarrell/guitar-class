@@ -63,3 +63,16 @@ const complete = async (req, res) => {
     });
   }
 };
+
+const remove = async (req, res) => {
+  try {
+    let enrollment = req.enrollment;
+    let deletedEnrollment = await enrollment.remove();
+    res.json(deletedEnrollment);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
+
