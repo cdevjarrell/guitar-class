@@ -85,3 +85,17 @@ const isStudent = (req, res, next) => {
   }
   next();
 };
+
+const listEnrolled = async (req, res) => {
+  try {
+    let enrollments = await Enrollment.find({ student: req.auth._id })
+      .sort({ completed: 1 })
+      .populate("course", "_id name category");
+    res.json(enrollments);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
