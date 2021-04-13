@@ -43,3 +43,23 @@ const enrollmentByID = async (req, res, next, id) => {
 const read = (req, res) => {
   return res.json(req.enrollment);
 };
+
+const complete = async (req, res) => {
+  let updatedData = {};
+  updatedData["lessonStatus.$.complete"] = req.body.complete;
+  updatedData.updated = Date.now();
+  if (req.body.courseCompleted)
+    updatedData.completed = req.body.courseCompleted;
+
+  try {
+    let enrollment = await Enrollment.updateOne(
+      { "lessonStatus._id": req.body.lessonStatusId },
+      { $set: updatedData }
+    );
+    res.json(enrollment);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
