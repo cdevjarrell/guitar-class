@@ -49,3 +49,8 @@ const courseByID = async (req, res, next, id) => {
     });
   }
 };
+
+const read = (req, res) => {
+  req.course.image = undefined;
+  return res.json(req.course);
+};
