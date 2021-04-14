@@ -30,3 +30,22 @@ const create = (req, res) => {
     }
   });
 };
+
+const courseByID = async (req, res, next, id) => {
+  try {
+    let course = await (await Course.findById(id)).populated(
+      "instructor",
+      "_id name"
+    );
+    if (!course)
+      return res.status("400").json({
+        error: "Course not found",
+      });
+    req.course = course;
+    next();
+  } catch (err) {
+    return res.status("400").json({
+      error: "Could not retrieve course",
+    });
+  }
+};
