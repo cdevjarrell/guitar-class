@@ -54,3 +54,14 @@ const read = (req, res) => {
   req.course.image = undefined;
   return res.json(req.course);
 };
+
+const list = async (req, res) => {
+  try {
+    let courses = await Course.find().select("name email updated created");
+    res.json(courses);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
+};
