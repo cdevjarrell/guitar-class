@@ -39,3 +39,10 @@ const signin = async (req, res) => {
     });
   }
 };
+
+const signout = (req, res) => {
+  res.clearCookie("t");
+  return res.status("200").json({
+    message: "Signed out",
+  });
+};
