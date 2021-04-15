@@ -1,4 +1,4 @@
-import express from "expres";
+import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import compress from "compression";

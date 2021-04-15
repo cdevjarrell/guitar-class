@@ -1,5 +1,5 @@
 import Enrollment from "../models/enrollment.model";
-import errorHandler from "./../helper/dbErrorHandler";
+import errorHandler from "../helpers/dbErrorHandler";
 
 const create = async (req, res) => {
   let newErollment = {
