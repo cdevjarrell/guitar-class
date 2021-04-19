@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import Divider from "@material-ui/core/Divider";
 import { listPublished } from "./../course/api-course";
 import { listEnrolled, listCompleted } from "./../enrollment/api-enrollment";
 import Typography from "@material-ui/core/Typography";
